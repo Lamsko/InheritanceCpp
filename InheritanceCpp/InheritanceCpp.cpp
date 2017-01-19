@@ -2,51 +2,51 @@
 //
 
 #include "stdafx.h"
+#include <iostream>
 
-class Bazowa
-{
-private:
-	int prywatna;
-protected:
-	int chroniona;
-public:
-	int publiczna;
-};
+using namespace std;
 
-class PochodnaPublic : public Bazowa
+class B
 {
 public:
-	void f()
+	int x;
+
+	B(int a)
+		: x(a)
+	{}
+
+	void bx()
 	{
-		chroniona = 0;
-		publiczna = 0;
+		cout << "B: " << x << endl;
 	}
 };
 
-class PochodnaProtected : protected Bazowa
+class P : public B
 {
-	void f()
-	{
-		chroniona = 0;
-		publiczna = 0;
-	}
-};
+public:
+	int x;
 
-class PochodnaPrivate : private Bazowa
-{
-	void f()
+	P(int a, int b)
+		: B(a), x(b)
+	{}
+
+	void px()
 	{
-		chroniona = 0;
-		publiczna = 0;
+		cout << "P: " << x << endl;
 	}
 };
 
 int main()
 {
-	PochodnaPublic ppu;
-	ppu.publiczna = 0;
-	PochodnaProtected ppr;
-	PochodnaPrivate ppv;
-    return 0;
+	P p(1, 2);
+	p.bx();
+	p.px();
+	cout << "---" << endl;
+	p.x = 0;
+	p.bx();
+	p.px();
+	cout << "---" << endl;
+	p.B::x = 8;
+	p.bx();
+	p.px();
 }
-
