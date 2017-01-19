@@ -6,47 +6,59 @@
 
 using namespace std;
 
-class B
+class Ksztalt
 {
 public:
-	int x;
+	virtual ~Ksztalt() {}
 
-	B(int a)
-		: x(a)
-	{}
-
-	void bx()
+	virtual void rysuj() = 0;
+	void maluj() 
 	{
-		cout << "B: " << x << endl;
+		cout << "Maluje ksztalt." << endl;
 	}
 };
 
-class P : public B
+class Kolo : public Ksztalt
 {
 public:
-	int x;
-
-	P(int a, int b)
-		: B(a), x(b)
-	{}
-
-	void px()
+	virtual void rysuj()
 	{
-		cout << "P: " << x << endl;
+		cout << "Rysuje kolo." << endl;
+	}
+	void maluj()
+	{
+		cout << "Maluje kolo." << endl;
+	}
+};
+
+class Kwadrat : public Ksztalt
+{
+public:
+	virtual void rysuj()
+	{
+		cout << "Rysuje kwadrat." << endl;
+	}
+	void maluj()
+	{
+		cout << "Maluje kwadrat." << endl;
 	}
 };
 
 int main()
 {
-	P p(1, 2);
-	p.bx();
-	p.px();
-	cout << "---" << endl;
-	p.x = 0;
-	p.bx();
-	p.px();
-	cout << "---" << endl;
-	p.B::x = 8;
-	p.bx();
-	p.px();
+	Ksztalt * a = new Kolo, *b = new Kwadrat;
+
+	a->rysuj();
+	b->rysuj();
+	a->maluj();
+	b->maluj();
+	Kolo ko;
+	Kwadrat kw;
+	ko.rysuj();
+	kw.rysuj();
+	ko.maluj();
+	kw.maluj();
+
+	delete a;
+	delete b;
 }
